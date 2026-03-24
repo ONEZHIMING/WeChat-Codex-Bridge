@@ -17,6 +17,7 @@
 - 人格设置（每个用户可单独配置）
 - 记忆库（本地 SQLite）
 - 媒体发送指令（图片/文件/语音）
+- 多账号（基于 `instance` 隔离）
 
 ---
 
@@ -56,7 +57,7 @@ npm run start
 你会看到什么：
 
 - `npm run login` 时，终端会显示微信二维码  
-- 你扫码并确认后，会生成 token 文件（例如 `.weixin-token.json`）  
+- 你扫码并确认后，会生成 token 文件（例如 `.weixin-token.wx1.json`）  
 - `npm run start` 后，终端会持续输出“收消息/回消息”日志
 
 如果你能在微信里发一句话并收到回复，说明启动成功。
@@ -103,6 +104,44 @@ node wechat-claude-bridge.mjs --help
   - 可选：`--mode merge|replace`（默认 `merge`）
 - `memory validate`
   - 必填：`--in <json路径>`
+
+### 4.5 多账号用法（重点）
+
+登录第 1 个账号（实例 `wx1`）：
+
+```bash
+npm run login -- --instance wx1
+```
+
+登录第 2 个账号（实例 `wx2`）：
+
+```bash
+npm run login -- --instance wx2
+```
+
+分别启动两个账号（建议开两个终端）：
+
+```bash
+npm run start -- --instance wx1
+npm run start -- --instance wx2
+```
+
+查看当前目录下已登录账号：
+
+```bash
+npm run accounts
+```
+
+文件隔离规则（按实例ID自动分开）：
+
+- token：`.weixin-token.<instance>.json`
+- 会话映射：`.codex-session-map.<instance>.json`
+- 记忆库：`.wechat-memory.<instance>.db`
+
+参数优先级：
+
+- 启动参数 `--instance` / `-i` 优先级高于 `.env` 里的 `INSTANCE_ID`
+- 不传 `--instance` 时，默认使用 `.env` 中的 `INSTANCE_ID`
 
 ---
 
@@ -151,7 +190,10 @@ vim .env
 先只改这几个：
 
 - `INSTANCE_ID=wx1`  
-  多账号/多实例时，给每个实例不同 ID。
+  默认实例 ID；不传 `--instance` 时就用它。
+
+- 多账号建议：  
+  登录/启动时优先用 `--instance` 显式指定，例如 `--instance wx2`。
 
 - `ENABLE_PROGRESS_STREAM=0`  
   建议保持 `0`，避免把处理过程发给微信用户。
