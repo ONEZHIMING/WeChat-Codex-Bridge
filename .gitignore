@@ -1,0 +1,15 @@
+node_modules/
+*.tgz
+dist/
+.env
+.weixin-token.json
+.weixin-token.*.json
+.weixin-token.json.lock
+.codex-session-map*.json
+.wechat-memory*.db
+.wechat-memory*.db-shm
+.wechat-memory*.db-wal
+exports/
+exports-test/
+.DS_Store
+.idea/
