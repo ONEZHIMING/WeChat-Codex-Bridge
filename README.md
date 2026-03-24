@@ -13,7 +13,7 @@
 2. 把消息交给 Codex CLI 生成回复  
 3. 把回复发送回微信
 
-<img width="956" height="974" alt="image" src="https://github.com/user-attachments/assets/a1b0ae2a-0233-45f9-b478-20b8d3f5dc93" />
+<img width="400" height="auto" alt="image" src="https://github.com/user-attachments/assets/a1b0ae2a-0233-45f9-b478-20b8d3f5dc93" />
 
 
 支持功能：
