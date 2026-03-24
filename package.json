@@ -5,10 +5,10 @@
     "packages/*"
   ],
   "scripts": {
-    "start": "node wechat-claude-bridge.mjs start",
-    "login": "node wechat-claude-bridge.mjs login",
-    "accounts": "node wechat-claude-bridge.mjs accounts",
-    "help": "node wechat-claude-bridge.mjs --help",
+    "start": "node wechat-codex-bridge.mjs start",
+    "login": "node wechat-codex-bridge.mjs login",
+    "accounts": "node wechat-codex-bridge.mjs accounts",
+    "help": "node wechat-codex-bridge.mjs --help",
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces --if-present"
   },

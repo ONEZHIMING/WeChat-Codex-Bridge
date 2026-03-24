@@ -78,13 +78,13 @@ npm run help
 ### 4.2 Node 命令（完整）
 
 ```bash
-node wechat-claude-bridge.mjs [start] [--instance <id>] [--login]
-node wechat-claude-bridge.mjs login [--instance <id>]
-node wechat-claude-bridge.mjs accounts
-node wechat-claude-bridge.mjs memory export --user <id> [--out <json路径或目录>]
-node wechat-claude-bridge.mjs memory import --user <id> --in <json路径> [--mode merge|replace]
-node wechat-claude-bridge.mjs memory validate --in <json路径>
-node wechat-claude-bridge.mjs --help
+node wechat-codex-bridge.mjs [start] [--instance <id>] [--login]
+node wechat-codex-bridge.mjs login [--instance <id>]
+node wechat-codex-bridge.mjs accounts
+node wechat-codex-bridge.mjs memory export --user <id> [--out <json路径或目录>]
+node wechat-codex-bridge.mjs memory import --user <id> --in <json路径> [--mode merge|replace]
+node wechat-codex-bridge.mjs memory validate --in <json路径>
+node wechat-codex-bridge.mjs --help
 ```
 
 ### 4.3 参数说明（常用）
@@ -230,19 +230,19 @@ vim .env
 导出用户记忆：
 
 ```bash
-node wechat-claude-bridge.mjs memory export --user wxid_xxx --out ./exports
+node wechat-codex-bridge.mjs memory export --user wxid_xxx --out ./exports
 ```
 
 校验导出文件：
 
 ```bash
-node wechat-claude-bridge.mjs memory validate --in ./exports/wxid_xxx.memory.v1.json
+node wechat-codex-bridge.mjs memory validate --in ./exports/wxid_xxx.memory.v1.json
 ```
 
 导入到另一个用户（合并模式）：
 
 ```bash
-node wechat-claude-bridge.mjs memory import --user wxid_target --in ./exports/wxid_xxx.memory.v1.json --mode merge
+node wechat-codex-bridge.mjs memory import --user wxid_target --in ./exports/wxid_xxx.memory.v1.json --mode merge
 ```
 
 ---
@@ -279,7 +279,7 @@ npm run login
 或：
 
 ```bash
-node wechat-claude-bridge.mjs --login
+node wechat-codex-bridge.mjs --login
 ```
 
 ---
@@ -301,7 +301,7 @@ node wechat-claude-bridge.mjs --login
 
 ## 11. 目录说明
 
-- `wechat-claude-bridge.mjs`：主程序入口
+- `wechat-codex-bridge.mjs`：主程序入口
 - `.env`：默认可用配置（开箱即用）
 - `.env.example`：配置模板
 - `soule.md`：人格存储文件

@@ -4,9 +4,9 @@
  * 无需 openclaw，直接 HTTP 调用 ilinkai.weixin.qq.com
  *
  * 用法:
- *   node wechat-claude-bridge.mjs start --instance wx1
- *   node wechat-claude-bridge.mjs login --instance wx1
- *   node wechat-claude-bridge.mjs accounts
+ *   node wechat-codex-bridge.mjs start --instance wx1
+ *   node wechat-codex-bridge.mjs login --instance wx1
+ *   node wechat-codex-bridge.mjs accounts
  */
 
 import crypto from "node:crypto";
@@ -90,13 +90,13 @@ function withInstanceSuffix(fileName, instanceId) {
 
 function printHelp() {
   console.log(`用法:
-  node wechat-claude-bridge.mjs [start] [--instance <id>] [--login]
-  node wechat-claude-bridge.mjs login [--instance <id>]
-  node wechat-claude-bridge.mjs accounts
-  node wechat-claude-bridge.mjs memory export --user <id> [--out <json路径>]
-  node wechat-claude-bridge.mjs memory import --user <id> --in <json路径> [--mode merge|replace]
-  node wechat-claude-bridge.mjs memory validate --in <json路径>
-  node wechat-claude-bridge.mjs --help
+  node wechat-codex-bridge.mjs [start] [--instance <id>] [--login]
+  node wechat-codex-bridge.mjs login [--instance <id>]
+  node wechat-codex-bridge.mjs accounts
+  node wechat-codex-bridge.mjs memory export --user <id> [--out <json路径>]
+  node wechat-codex-bridge.mjs memory import --user <id> --in <json路径> [--mode merge|replace]
+  node wechat-codex-bridge.mjs memory validate --in <json路径>
+  node wechat-codex-bridge.mjs --help
 
 说明:
   start                  启动 bridge（默认命令）
@@ -348,7 +348,7 @@ function listAccounts() {
   const files = fs.readdirSync(process.cwd()).filter((f) => /^\.weixin-token(\..+)?\.json$/.test(f));
   if (!files.length) {
     console.log("未发现已登录账号。先执行：");
-    console.log("  node wechat-claude-bridge.mjs login --instance wx1");
+    console.log("  node wechat-codex-bridge.mjs login --instance wx1");
     return;
   }
 
@@ -370,8 +370,8 @@ function listAccounts() {
     console.log(`  User: ${userId}`);
     console.log(`  保存时间: ${savedAt}`);
     const runCmd = instanceId === "(default)"
-      ? "node wechat-claude-bridge.mjs"
-      : `INSTANCE_ID=${instanceId} node wechat-claude-bridge.mjs`;
+      ? "node wechat-codex-bridge.mjs"
+      : `INSTANCE_ID=${instanceId} node wechat-codex-bridge.mjs`;
     console.log(`  启动命令: ${runCmd}`);
   }
 }
@@ -2625,7 +2625,7 @@ async function main() {
   if (!forceLogin && fs.existsSync(TOKEN_FILE)) {
     session = JSON.parse(fs.readFileSync(TOKEN_FILE, "utf-8"));
     console.log(`✅ 已加载 token（Bot: ${session.accountId}，保存于 ${session.savedAt}）`);
-    console.log(`   如需重新登录，运行: node wechat-claude-bridge.mjs --login\n`);
+    console.log(`   如需重新登录，运行: node wechat-codex-bridge.mjs --login\n`);
   } else {
     session = await login();
   }
@@ -2758,7 +2758,7 @@ async function main() {
       }
     } catch (err) {
       if (err.message?.includes("session timeout") || err.message?.includes("-14")) {
-        console.error("❌ Session 已过期，请重新登录: node wechat-claude-bridge.mjs --login");
+        console.error("❌ Session 已过期，请重新登录: node wechat-codex-bridge.mjs --login");
         process.exit(1);
       }
       console.error(`⚠️  轮询出错: ${err.message}，3 秒后重试...`);
