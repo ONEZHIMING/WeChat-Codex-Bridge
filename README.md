@@ -49,7 +49,6 @@ codex --version
 
 ```bash
 npm install
-cp .env.example .env
 npm run login
 npm run start
 ```
@@ -143,10 +142,10 @@ node wechat-claude-bridge.mjs --help
 
 ## 6. `.env` 配置怎么改（小白推荐）
 
-复制模板：
+项目里已经自带 `.env`，直接修改即可：
 
 ```bash
-cp .env.example .env
+vim .env
 ```
 
 先只改这几个：
@@ -246,12 +245,14 @@ node wechat-claude-bridge.mjs --login
 ## 10. 安全建议（上线前）
 
 - 不要提交以下文件到仓库：
-  - `.env`
+  - `.env.local`
+  - `.env.*.local`
   - `.weixin-token*.json`
   - `.codex-session-map*.json`
   - `.wechat-memory*.db`
 - 生产建议：
   - `ENABLE_PROGRESS_STREAM=0`
+  - 敏感配置写入 `.env.local`（不要写进默认 `.env`）
   - 定期备份 `MEMORY_DB_FILE`
 
 ---
@@ -259,6 +260,7 @@ node wechat-claude-bridge.mjs --login
 ## 11. 目录说明
 
 - `wechat-claude-bridge.mjs`：主程序入口
+- `.env`：默认可用配置（开箱即用）
 - `.env.example`：配置模板
 - `soule.md`：人格存储文件
 - `protocol.md`、`weixin-bot-api.md`：协议参考
